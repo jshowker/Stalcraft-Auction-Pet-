@@ -2,14 +2,29 @@
   "name": "stalcraftapp",
   "version": "1.0.0",
   "description": "auction helper",
-  "main": "script/main.js",
+  "type": "module",
+  "main": "main-process/main.mjs",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "watch": "webpack --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^33.2.0"
+    "@babel/core": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
+    "babel-loader": "^9.2.1",
+    "electron": "^33.2.1",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "custom-electron-titlebar": "^4.2.8",
+    "glob": "^11.0.0",
+    "path-browserify": "^1.0.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "recharts": "^2.15.0"
   }
 }

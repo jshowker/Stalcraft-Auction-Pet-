@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filters and Statistics</title>
+  <link rel="stylesheet" href="../css/style.css"> <!-- Подключение CSS -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Подключение Material Icons -->
+</head>
+<body>
+  <header id="titlebar">
+    <div id="drag-region">
+      <div id="window-title">
+        <span>SAH</span>
+      </div>
+      <div id="window-controls">
+          <div class="button" id="min-button">
+              <img class="icon" src="../source/min-w-12.png" draggable="false" />
+          </div>
+          <div class="button" id="max-button" style="display: flex;">
+              <img class="icon" src="../source/max-w-12.png" draggable="false" />
+          </div>
+          <div class="button" id="restore-button" style="display: none;">
+              <img class="icon" src="../source/close-w-12.png" draggable="false" />
+          </div>
+          <div class="button" id="close-button">
+              <img class="icon" src="../source/close-w-12.png" draggable="false" />
+          </div>
+      </div>
+    </div>
+  </header>
+  <div id="main" class="container">
+    <!-- Сайдбар с фильтрами -->
+    <aside class="sidebar">
+      <div class="filter-header">
+        <span>Filters</span>
+      </div>
+      <div class="filter-content">
+
+        <!-- Поиск (полупрозрачный фон) -->
+        <div class="search-bar">
+          <input
+            type="search"
+            placeholder="Search..."
+            class="search-input"
+          />
+        </div>
+
+        <!-- Диапазон цены -->
+        <div class="price-range">
+          <input
+            type="number"
+            id="price-min"
+            placeholder="Min"
+            class="price-input"
+            min="1"
+            max="15"
+          />
+          -
+          <input
+            type="number"
+            id="price-max"
+            placeholder="Max"
+            class="price-input"
+            min="1"
+            max="15"
+          />
+        </div>
+
+        <!-- Переключатель (Items / Artefacts) -->
+        <div class="filter-group">
+          <div class="switch-button">
+            <input class="switch-button-checkbox" type="checkbox" id="switch-cb" />
+            <label class="switch-button-label" for="switch-cb">
+              <span class="switch-button-label-span">Items</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Секция фильтров: armor, attachment, weapon (раскрывающиеся) -->
+        <div class="filters">
+          <details class="filter-group" open>
+            <summary class="filter-title">armor</summary>
+            <!-- Подпапки armor -->
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="armor/clothes" />
+              clothes
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="armor/combat" />
+              combat
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="armor/combined" />
+              combined
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="armor/device" />
+              device
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="armor/scientist" />
+              scientist
+            </label>
+          </details>
+
+          <details class="filter-group">
+            <summary class="filter-title">attachment</summary>
+            <!-- Подпапки attachment -->
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="attachment/barrel" />
+              barrel
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="attachment/collimator_sights" />
+              collimator_sights
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="attachment/forend" />
+              forend
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="attachment/mag" />
+              mag
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="attachment/other" />
+              other
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="attachment/pistol_handle" />
+              pistol_handle
+            </label>
+          </details>
+
+          <details class="filter-group">
+            <summary class="filter-title">weapon</summary>
+            <!-- Подпапки weapon -->
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="weapon/assault_rifle" />
+              assault_rifle
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="weapon/device" />
+              device
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="weapon/heavy" />
+              heavy
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="weapon/machine_gun" />
+              machine_gun
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="weapon/melee" />
+              melee
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="weapon/pistol" />
+              pistol
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="weapon/shotgun_rifle" />
+              shotgun_rifle
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="weapon/sniper_rifle" />
+              sniper_rifle
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="weapon/submachine_gun" />
+              submachine_gun
+            </label>
+          </details>
+
+          <!-- Остальные (одним чекбоксом) -->
+          <details class="filter-group">
+            <summary class="filter-title">Other Categories</summary>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="bullet" />
+              bullet
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="containers" />
+              containers
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="drink" />
+              drink
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="food" />
+              food
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="grenade" />
+              grenade
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="medicine" />
+              medicine
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="misc" />
+              misc
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="category-checkbox" value="other" />
+              other
+            </label>
+          </details>
+
+          <!-- Rarity (шесть рангов) -->
+          <details class="filter-group">
+            <summary class="filter-title">Rarity</summary>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="rarity-checkbox" value="Отмычка" />
+              Отмычка
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="rarity-checkbox" value="Новичок" />
+              Новичок
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="rarity-checkbox" value="Сталкер" />
+              Сталкер
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="rarity-checkbox" value="Ветеран" />
+              Ветеран
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="rarity-checkbox" value="Мастер" />
+              Мастер
+            </label>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="rarity-checkbox" value="Легенда" />
+              Легенда
+            </label>
+          </details>
+
+          <!-- Modification (похоже на Min–Max, но 0..15) -->
+          <div class="filter-group">
+            <span class="filter-title">Modification</span>
+            <div class="modification-range">
+              <input
+                type="number"
+                id="mod-min"
+                placeholder="MinMod"
+                class="mod-input"
+                min="0"
+                max="15"
+              />
+              -
+              <input
+                type="number"
+                id="mod-max"
+                placeholder="MaxMod"
+                class="mod-input"
+                min="0"
+                max="15"
+              />
+            </div>
+          </div>
+        <!-- Конец filters -->
+
+      </div>
+      <!-- Apply / Reset -->
+      <div class="filter-footer">
+        <button class="footer-button">Apply</button>
+        <button class="footer-button">Reset</button>
+      </div>
+    </aside>
+
+    <!-- Основной контент -->
+    <div class="content">
+      <!-- Верхняя часть: график -->
+      <div class="graph">
+        <!-- Здесь React монтирует ChartComponent -->
+        <div id="graph-container"></div>
+      </div>
+
+      <!-- Список (нижний блок) -->
+      <div class="large-box">
+        <ul id="items-list"></ul>
+      </div>
+    </div>
+  <!-- Ваш renderer.js с логикой (пример ниже) -->
+  <script src="bundle.js"></script>
+</body>
+</html>
