@@ -2,7 +2,6 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import ChartComponent from "../renderer/ChartComponent.jsx";
 
-// Рендеринг ChartComponent
 const graphContainer = document.getElementById("graph-container");
 if (graphContainer) {
     const root = createRoot(graphContainer);
@@ -11,13 +10,11 @@ if (graphContainer) {
     console.error("Graph container not found");
 }
 
-// Кнопки управления окном
 const minButton = document.getElementById("min-button");
 const maxButton = document.getElementById("max-button");
 const restoreButton = document.getElementById("restore-button");
 const closeButton = document.getElementById("close-button");
 
-// Обновление состояния кнопок (максимизация/восстановление)
 const updateMaximizeRestoreButtons = (isMaximized) => {
     if (isMaximized) {
         maxButton.style.display = "none";
@@ -28,7 +25,6 @@ const updateMaximizeRestoreButtons = (isMaximized) => {
     }
 };
 
-// Установка обработчиков событий для кнопок
 if (minButton) {
     minButton.addEventListener("click", () => {
         window.electronAPI.minimizeWindow();
@@ -53,11 +49,9 @@ if (closeButton) {
     });
 }
 
-// Обработка изменения состояния окна
 window.electronAPI.onMaximizeStateChange((isMaximized) => {
     updateMaximizeRestoreButtons(isMaximized);
 });
-// Остальная логика
 async function getAccessToken() {
   const url = "https://exbo.net/oauth/token";
   const authData = {
@@ -323,11 +317,10 @@ if (itemsList) {
   itemsList.addEventListener("click", async (event) => {
     const target = event.target;
 
-    // Ensure we're clicking on the <li> element
     if (target.tagName.toLowerCase() === "li") {
       try {
-        const id = target.getAttribute("data-id"); // Fetch the item ID
-        const token = await getAccessToken(); // Ensure token is fetched correctly
+        const id = target.getAttribute("data-id"); 
+        const token = await getAccessToken(); 
         if (!token) throw new Error("Token not available");
 
         const options = {
@@ -345,9 +338,8 @@ if (itemsList) {
         }
 
         const data = await response.json();
-        const groupedData = groupByDay(data.prices); // Process the API data
+        const groupedData = groupByDay(data.prices); 
 
-        // Dispatch the grouped data to the ChartComponent
         window.dispatchEvent(
           new CustomEvent("chartDataUpdated", { detail: groupedData })
         );
@@ -360,9 +352,7 @@ if (itemsList) {
   console.error("Items list not found.");
 }
 
-/**
- * Groups the data (prices) by day, summing quantities and finding the minimum price per day.
- */
+
 function groupByDay(pricesArray) {
   const map = new Map();
 
