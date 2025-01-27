@@ -1,6 +1,5 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
-// Связываем основной процесс с рендерером через API
 contextBridge.exposeInMainWorld("electronAPI", {
     minimizeWindow: () => ipcRenderer.send("window-minimize"),
     maximizeWindow: () => ipcRenderer.send("window-maximize"),
